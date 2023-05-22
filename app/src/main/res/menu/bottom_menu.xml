@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/linksFragment"
+        android:icon="@drawable/ic_baseline_link_24"
+        android:title="Links" />
+    <item
+        android:id="@+id/coursesFragment"
+        android:icon="@drawable/ic_baseline_menu_book_24"
+        android:title="Courses" />
+    <item android:title="Item" />
+    <item
+        android:id="@+id/campaignsFragment"
+        android:icon="@drawable/ic_baseline_campaign_24"
+        android:title="Campaigns" />
+    <item
+        android:id="@+id/profileFragment"
+        android:icon="@drawable/ic_baseline_account_box_24"
+        android:title="Profiles" />
+</menu>
