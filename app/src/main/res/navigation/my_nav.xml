@@ -13,7 +13,12 @@
         android:id="@+id/coursesFragment"
         android:name="com.example.bottomnav.CoursesFragment"
         android:label="fragment_courses"
-        tools:layout="@layout/fragment_courses" />
+        tools:layout="@layout/fragment_courses" >
+        <argument
+            android:name="Name"
+            app:argType="string"
+            android:defaultValue="null" />
+    </fragment>
     <fragment
         android:id="@+id/campaignsFragment"
         android:name="com.example.bottomnav.CampaignsFragment"
