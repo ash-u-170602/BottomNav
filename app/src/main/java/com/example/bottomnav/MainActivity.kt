@@ -22,7 +22,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun floatingAction(view: View) {
-        val navHostFragment = supportFragmentManager.findFragmentById(R.id.adddFragment) as NavHostFragment
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
         val navController = navHostFragment.navController
 
         navController.navigate(R.id.addFragment)
