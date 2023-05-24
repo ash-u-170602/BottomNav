@@ -6,12 +6,12 @@
     app:startDestination="@id/linksFragment">
     <fragment
         android:id="@+id/linksFragment"
-        android:name="com.example.bottomnav.LinksFragment"
+        android:name="com.example.bottomnav.Fragments.LinksFragment"
         android:label="fragment_links"
         tools:layout="@layout/fragment_links" />
     <fragment
         android:id="@+id/coursesFragment"
-        android:name="com.example.bottomnav.CoursesFragment"
+        android:name="com.example.bottomnav.Fragments.CoursesFragment"
         android:label="fragment_courses"
         tools:layout="@layout/fragment_courses" >
         <argument
@@ -21,17 +21,17 @@
     </fragment>
     <fragment
         android:id="@+id/campaignsFragment"
-        android:name="com.example.bottomnav.CampaignsFragment"
+        android:name="com.example.bottomnav.Fragments.CampaignsFragment"
         android:label="fragment_campaigns"
         tools:layout="@layout/fragment_campaigns" />
     <fragment
         android:id="@+id/profileFragment"
-        android:name="com.example.bottomnav.ProfileFragment"
+        android:name="com.example.bottomnav.Fragments.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" />
     <fragment
         android:id="@+id/addFragment"
-        android:name="com.example.bottomnav.addFragment"
+        android:name="com.example.bottomnav.Fragments.addFragment"
         android:label="fragment_add"
         tools:layout="@layout/fragment_add" />
 </navigation>
