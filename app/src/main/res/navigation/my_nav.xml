@@ -13,8 +13,7 @@
         android:id="@+id/coursesFragment"
         android:name="com.example.bottomnav.Fragments.CoursesFragment"
         android:label="fragment_courses"
-        tools:layout="@layout/fragment_courses" >
-    </fragment>
+        tools:layout="@layout/fragment_courses"></fragment>
     <fragment
         android:id="@+id/campaignsFragment"
         android:name="com.example.bottomnav.Fragments.CampaignsFragment"
