@@ -2,6 +2,7 @@ package com.example.bottomnav.Fragments
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -25,8 +26,9 @@ class CoursesFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_courses, container, false)
         val textView = view.findViewById<TextView>(R.id.textView)
 
-        sharedViewModel.data.observe(viewLifecycleOwner) {
-            textView.text = it
+        sharedViewModel.data.observe(viewLifecycleOwner) { data ->
+            Log.d("dataaa", data)
+            textView.text = data
         }
 
         return view
