@@ -13,18 +13,8 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.bottomnav.R
 import com.example.bottomnav.SharedViewModel
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [CoursesFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class CoursesFragment : Fragment() {
-    private lateinit var name: String
     private val sharedViewModel: SharedViewModel by activityViewModels()
 
     override fun onCreateView(

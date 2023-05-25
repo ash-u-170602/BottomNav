@@ -31,8 +31,6 @@ class LinksFragment : Fragment() {
             sharedViewModel.data.value = editText.toString()
 
         }
-
-
         return view
     }
 
