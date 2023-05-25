@@ -9,30 +9,34 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.get
 import com.example.bottomnav.R
 import com.example.bottomnav.SharedViewModel
+import com.example.bottomnav.databinding.FragmentLinksBinding
 
 class LinksFragment : Fragment() {
-    private lateinit var editText: Editable
-    private val sharedViewModel: SharedViewModel by viewModels()
+    private lateinit var editText: EditText
+    private val sharedViewModel: SharedViewModel by activityViewModels()
+    private val binding by lazy { FragmentLinksBinding.inflate(layoutInflater) }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val view =  inflater.inflate(R.layout.fragment_links, container, false)
+        return binding.root
+    }
 
-        editText = view.findViewById<EditText>(R.id.editText).text
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-        view.findViewById<Button>(R.id.send).setOnClickListener{
-            sharedViewModel.data.value = editText.toString()
-            Log.d("lund", editText.toString())
+
+        binding.send.setOnClickListener{
+            sharedViewModel.getHomeData(binding.editText.text.toString())
         }
-        return view
     }
 
 }
