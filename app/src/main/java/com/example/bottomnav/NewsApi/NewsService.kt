@@ -11,9 +11,8 @@ import retrofit2.http.Query
 const val BASE_URL = "https://newsapi.org/"
 const val API_KEY = "180ee558b8a04d6d926acfc4b9cc2e59"
 
-
+//https://newsapi.org/v2/top-headlines?apiKey=180ee558b8a04d6d926acfc4b9cc2e59&country=ca&page=1
 interface NewsInterface {
-private val sharedViewModel: SharedViewModel by a
 
     @GET("v2/top-headlines?apiKey=$API_KEY")
     fun getHeadlines(@Query("country") country: String, @Query("page") page: Int): Call<News>

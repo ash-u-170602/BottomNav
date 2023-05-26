@@ -6,10 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.bottomnav.NewsApi.NewsAdapter
 import com.example.bottomnav.NewsApi.NewsService
 import com.example.bottomnav.NewsApi.modalClasses.News
+import com.example.bottomnav.SharedViewModel
 import com.example.bottomnav.databinding.FragmentCampaignsBinding
 import retrofit2.Call
 import retrofit2.Callback
@@ -18,6 +20,7 @@ import retrofit2.Response
 class CampaignsFragment : Fragment() {
     private val binding by lazy { FragmentCampaignsBinding.inflate(layoutInflater) }
     lateinit var adapter: NewsAdapter
+    private val sharedViewModel: SharedViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,11 +38,15 @@ class CampaignsFragment : Fragment() {
 
     //get news
     private fun getNews() {
-        val news = NewsService.newsInstance.getHeadlines("in", 1)
+
+        val news =
+            NewsService.newsInstance.getHeadlines(sharedViewModel.homeData.value.toString(), 1)
+
+
         news.enqueue(object : Callback<News> {
             override fun onResponse(call: Call<News>, response: Response<News>) {
                 val news = response.body()
-                if (news!=null){
+                if (news != null) {
                     adapter = NewsAdapter(requireContext(), news.articles)
                     binding.newsList.adapter = adapter
                     binding.newsList.layoutManager = LinearLayoutManager(requireContext())

@@ -25,7 +25,11 @@ class NewsAdapter(val context: Context, val articles: List<Article>) :
     override fun onBindViewHolder(holder: ArticleViewHolder, position: Int) {
         val article = articles[position]
         holder.newsTitle.text = article.title
-        holder.newsDescription.text = article.description
+
+        if (article.description == null) {
+            holder.newsDescription.text = "null"
+        } else holder.newsDescription.text = article.description
+
         Glide.with(context).load(article.urlToImage).into(holder.newsImage)
 
         holder.itemView.setOnClickListener {
