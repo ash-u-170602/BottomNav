@@ -40,7 +40,7 @@ class CampaignsFragment : Fragment() {
             }
 
             override fun onFailure(call: Call<News>, t: Throwable) {
-                Toast.makeText(MainActivity, "", Toast.LENGTH_LONG).show()
+                Toast.makeText(requireContext(), "", Toast.LENGTH_LONG).show()
             }
         })
 
