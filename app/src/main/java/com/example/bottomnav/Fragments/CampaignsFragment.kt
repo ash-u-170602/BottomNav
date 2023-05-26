@@ -1,17 +1,14 @@
 package com.example.bottomnav.Fragments
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import com.example.bottomnav.MainActivity
+import androidx.fragment.app.Fragment
 import com.example.bottomnav.NewsApi.NewsService
 import com.example.bottomnav.NewsApi.modalClasses.News
-import com.example.bottomnav.R
 import com.example.bottomnav.databinding.FragmentCampaignsBinding
-import com.example.bottomnav.databinding.FragmentLinksBinding
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -34,7 +31,7 @@ class CampaignsFragment : Fragment() {
 
     private fun getNews() {
         val news = NewsService.newsInstance.getHeadlines("in", 1)
-        news.enqueue(object: Callback<News>{
+        news.enqueue(object : Callback<News> {
             override fun onResponse(call: Call<News>, response: Response<News>) {
                 val news = response.body()
             }
