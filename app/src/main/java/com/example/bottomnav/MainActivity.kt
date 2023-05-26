@@ -13,8 +13,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        supportActionBar?.hide()
-
         val bottomNavigationView = binding.bottomNavigation
         val navController =
             supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
