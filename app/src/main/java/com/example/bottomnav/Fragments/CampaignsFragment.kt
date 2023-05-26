@@ -36,7 +36,7 @@ class CampaignsFragment : Fragment() {
         val news = NewsService.newsInstance.getHeadlines("in", 1)
         news.enqueue(object: Callback<News>{
             override fun onResponse(call: Call<News>, response: Response<News>) {
-                TODO("Not yet implemented")
+                val news = response.body()
             }
 
             override fun onFailure(call: Call<News>, t: Throwable) {
