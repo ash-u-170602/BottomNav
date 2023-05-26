@@ -21,7 +21,10 @@ class NewsAdapter(val context: Context, val articles: List<Article>) :
     }
 
     override fun onBindViewHolder(holder: ArticleViewHolder, position: Int) {
-        TODO("Not yet implemented")
+        val article = articles[position]
+        holder.newsTitle.text = article.title
+        holder.newsDescription.text = article.description
+
     }
 
     override fun getItemCount(): Int {

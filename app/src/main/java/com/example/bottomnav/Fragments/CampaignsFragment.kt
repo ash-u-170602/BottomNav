@@ -6,6 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.bottomnav.NewsApi.NewsAdapter
 import com.example.bottomnav.NewsApi.NewsService
 import com.example.bottomnav.NewsApi.modalClasses.News
 import com.example.bottomnav.databinding.FragmentCampaignsBinding
@@ -15,6 +17,7 @@ import retrofit2.Response
 
 class CampaignsFragment : Fragment() {
     private val binding by lazy { FragmentCampaignsBinding.inflate(layoutInflater) }
+    lateinit var adapter: NewsAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,6 +38,11 @@ class CampaignsFragment : Fragment() {
         news.enqueue(object : Callback<News> {
             override fun onResponse(call: Call<News>, response: Response<News>) {
                 val news = response.body()
+                if (news!=null){
+                    adapter = NewsAdapter(requireContext(), news.articles)
+                    binding.newsList.adapter = adapter
+                    binding.newsList.layoutManager = LinearLayoutManager(requireContext())
+                }
             }
 
             override fun onFailure(call: Call<News>, t: Throwable) {
