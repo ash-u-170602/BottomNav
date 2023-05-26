@@ -8,6 +8,7 @@ import retrofit2.http.Query
 const val BASE_URL = "https://newsapi.org/"
 const val API_KEY = "180ee558b8a04d6d926acfc4b9cc2e59"
 
+
 interface NewsInterface {
 
     @GET("v2/top-headlines?apiKey=$API_KEY")
