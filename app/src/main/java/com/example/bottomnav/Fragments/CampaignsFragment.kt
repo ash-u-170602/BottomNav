@@ -29,6 +29,7 @@ class CampaignsFragment : Fragment() {
         getNews()
     }
 
+    //get news
     private fun getNews() {
         val news = NewsService.newsInstance.getHeadlines("in", 1)
         news.enqueue(object : Callback<News> {
