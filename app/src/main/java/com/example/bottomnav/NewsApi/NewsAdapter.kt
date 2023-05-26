@@ -6,8 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
+import com.bumptech.glide.Glide
 import com.example.bottomnav.NewsApi.modalClasses.Article
 import com.example.bottomnav.R
 
@@ -24,6 +26,11 @@ class NewsAdapter(val context: Context, val articles: List<Article>) :
         val article = articles[position]
         holder.newsTitle.text = article.title
         holder.newsDescription.text = article.description
+        Glide.with(context).load(article.urlToImage).into(holder.newsImage)
+
+        holder.itemView.setOnClickListener {
+            Toast.makeText(context, article.title, Toast.LENGTH_LONG).show()
+        }
 
     }
 

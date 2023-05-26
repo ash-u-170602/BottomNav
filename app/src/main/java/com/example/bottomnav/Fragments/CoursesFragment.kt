@@ -24,7 +24,6 @@ class CoursesFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         sharedViewModel.homeData.observe(requireActivity()) { data ->
-            Log.d("dataaa", data)
             binding.textView.text = data
         }
     }
