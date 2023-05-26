@@ -26,9 +26,7 @@ class NewsAdapter(val context: Context, val articles: List<Article>) :
         val article = articles[position]
         holder.newsTitle.text = article.title
 
-        if (article.description == null) {
-            holder.newsDescription.text = "null"
-        } else holder.newsDescription.text = article.description
+        holder.newsDescription.text = article.description
 
         Glide.with(context).load(article.urlToImage).into(holder.newsImage)
 
