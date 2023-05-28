@@ -1,21 +1,23 @@
 package com.example.bottomnav.NewsApi
 
+import android.app.Application
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
+import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.bumptech.glide.Glide
 import com.example.bottomnav.NewsApi.modalClasses.Article
 import com.example.bottomnav.R
+import com.example.bottomnav.SharedViewModel
 
 class NewsAdapter(val context: Context, val articles: List<Article>) :
     Adapter<NewsAdapter.ArticleViewHolder>() {
-
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ArticleViewHolder {
         val view = LayoutInflater.from(context).inflate(R.layout.item_layout, parent, false)
@@ -28,13 +30,14 @@ class NewsAdapter(val context: Context, val articles: List<Article>) :
 
         holder.newsDescription.text = article.description
 
-        Glide.with(context).load(article.urlToImage).into(holder.newsImage)
+        Glide.with(context)
+            .load(article.urlToImage)
+            .into(holder.newsImage)
 
         holder.itemView.setOnClickListener {
-            Toast.makeText(context, article.title, Toast.LENGTH_LONG).show()
         }
-
     }
+
 
     override fun getItemCount(): Int {
         return articles.size

@@ -3,7 +3,7 @@ package com.example.bottomnav
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class SharedViewModel : ViewModel() {
+class SharedViewModel() : ViewModel() {
 
     private val _homeData = MutableLiveData<String>()
     val homeData: MutableLiveData<String>
