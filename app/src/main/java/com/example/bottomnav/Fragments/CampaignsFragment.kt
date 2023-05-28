@@ -47,7 +47,7 @@ class CampaignsFragment : Fragment(), NewsAdapter.OnItemClickListener {
             override fun onResponse(call: Call<News>, response: Response<News>) {
                 news = response.body()!!
                 if (news != null) {
-                    adapter = NewsAdapter(requireContext(), news.articles, this@CampaignsFragment)
+                    adapter = NewsAdapter(requireContext(), news.articles, NewsAdapter.OnItemClickListener)
                     binding.newsList.adapter = adapter
                     binding.newsList.layoutManager = LinearLayoutManager(requireContext())
                 }
@@ -62,6 +62,6 @@ class CampaignsFragment : Fragment(), NewsAdapter.OnItemClickListener {
 
     // Handle clicks
     override fun onItemClick(position: Int) {
-        Toast.makeText(requireContext(), news.articles[position].url, Toast.LENGTH_SHORT).show()
+        Toast.makeText(requireContext(), "${news.articles[position].url} sex", Toast.LENGTH_SHORT).show()
     }
 }
