@@ -21,6 +21,7 @@ class CampaignsFragment : Fragment(), NewsAdapter.OnItemClickListener {
     private val binding by lazy { FragmentCampaignsBinding.inflate(layoutInflater) }
     lateinit var adapter: NewsAdapter
     private val sharedViewModel: SharedViewModel by activityViewModels()
+    lateinit var news: News
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,15 +40,14 @@ class CampaignsFragment : Fragment(), NewsAdapter.OnItemClickListener {
     //get news
     private fun getNews() {
 
-        val news =
+        val newsService =
             NewsService.newsInstance.getHeadlines(sharedViewModel.homeData.value.toString(), 1)
 
-
-        news.enqueue(object : Callback<News> {
+        newsService.enqueue(object : Callback<News> {
             override fun onResponse(call: Call<News>, response: Response<News>) {
-                val news = response.body()
+                news = response.body()!!
                 if (news != null) {
-                    adapter = NewsAdapter(requireContext(), news.articles, this)
+                    adapter = NewsAdapter(requireContext(), news.articles, this@CampaignsFragment)
                     binding.newsList.adapter = adapter
                     binding.newsList.layoutManager = LinearLayoutManager(requireContext())
                 }
@@ -62,6 +62,6 @@ class CampaignsFragment : Fragment(), NewsAdapter.OnItemClickListener {
 
     // Handle clicks
     override fun onItemClick(position: Int) {
-        Toast.makeText(requireContext(), position, Toast.LENGTH_SHORT).show()
+        Toast.makeText(requireContext(), news.articles[position].url, Toast.LENGTH_SHORT).show()
     }
 }
