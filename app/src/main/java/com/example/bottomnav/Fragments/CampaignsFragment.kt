@@ -17,7 +17,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class CampaignsFragment : Fragment() {
+class CampaignsFragment : Fragment(), NewsAdapter.OnItemClickListener {
     private val binding by lazy { FragmentCampaignsBinding.inflate(layoutInflater) }
     lateinit var adapter: NewsAdapter
     private val sharedViewModel: SharedViewModel by activityViewModels()
@@ -47,7 +47,7 @@ class CampaignsFragment : Fragment() {
             override fun onResponse(call: Call<News>, response: Response<News>) {
                 val news = response.body()
                 if (news != null) {
-                    adapter = NewsAdapter(requireContext(), news.articles)
+                    adapter = NewsAdapter(requireContext(), news.articles, this)
                     binding.newsList.adapter = adapter
                     binding.newsList.layoutManager = LinearLayoutManager(requireContext())
                 }
@@ -58,5 +58,10 @@ class CampaignsFragment : Fragment() {
             }
         })
 
+    }
+
+    // Handle clicks
+    override fun onItemClick(position: Int) {
+        Toast.makeText(requireContext(), position, Toast.LENGTH_SHORT).show()
     }
 }

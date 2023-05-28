@@ -9,14 +9,20 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
+import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.bumptech.glide.Glide
+import com.example.bottomnav.MainActivity
 import com.example.bottomnav.NewsApi.modalClasses.Article
 import com.example.bottomnav.R
 import com.example.bottomnav.SharedViewModel
 
-class NewsAdapter(val context: Context, val articles: List<Article>) :
+class NewsAdapter(
+    val context: Context,
+    val articles: List<Article>,
+    val listener: OnItemClickListener
+) :
     Adapter<NewsAdapter.ArticleViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ArticleViewHolder {
@@ -43,11 +49,27 @@ class NewsAdapter(val context: Context, val articles: List<Article>) :
         return articles.size
     }
 
-    class ArticleViewHolder(itemView: View) : ViewHolder(itemView) {
+    inner class ArticleViewHolder(itemView: View) : ViewHolder(itemView), View.OnClickListener {
 
         var newsImage = itemView.findViewById<ImageView>(R.id.newsImage)
         var newsTitle = itemView.findViewById<TextView>(R.id.newsTitle)
         var newsDescription = itemView.findViewById<TextView>(R.id.newsDescription)
 
+        init {
+            itemView.setOnClickListener(this)
+        }
+
+        override fun onClick(v: View?) {
+            val position = adapterPosition
+            if (position != RecyclerView.NO_POSITION) {
+                listener.onItemClick(position)
+            }
+        }
+
     }
+
+    interface OnItemClickListener {
+        fun onItemClick(position: Int)
+    }
+
 }
