@@ -47,7 +47,7 @@ class CampaignsFragment : Fragment(), NewsAdapter.OnItemClickListener {
             override fun onResponse(call: Call<News>, response: Response<News>) {
                 news = response.body()!!
                 if (news != null) {
-                    adapter = NewsAdapter(requireContext(), news.articles, NewsAdapter.OnItemClickListener)
+                    adapter = NewsAdapter(requireContext(), news.articles, this)
                     binding.newsList.adapter = adapter
                     binding.newsList.layoutManager = LinearLayoutManager(requireContext())
                 }
