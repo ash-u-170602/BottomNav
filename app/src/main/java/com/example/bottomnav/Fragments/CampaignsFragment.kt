@@ -69,6 +69,10 @@ class CampaignsFragment : Fragment(), NewsAdapter.OnItemClickListener {
 
     }
 
+    override fun onItemClick(articles: List<Article>) {
+        TODO("Not yet implemented")
+    }
+
     // Handle clicks
 //    override fun onItemClick(position: Int) {
 //
