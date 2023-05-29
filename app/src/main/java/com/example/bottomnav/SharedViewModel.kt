@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel
 
 class SharedViewModel() : ViewModel() {
 
-    private val _homeData = MutableLiveData<String>()
+    private val _homeData = MutableLiveData<String>("in")
     val homeData: MutableLiveData<String>
         get() = _homeData
 
