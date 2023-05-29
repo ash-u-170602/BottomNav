@@ -6,16 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.bumptech.glide.Glide
-import com.example.bottomnav.MainActivity
 import com.example.bottomnav.NewsApi.modalClasses.Article
-import com.example.bottomnav.NewsApi.modalClasses.News
 import com.example.bottomnav.R
-import com.example.bottomnav.SharedViewModel
-import retrofit2.Callback
 
 class NewsAdapter(
     private val context: Context,
@@ -42,9 +37,6 @@ class NewsAdapter(
         Glide.with(context)
             .load(article.urlToImage)
             .into(holder.newsImage)
-
-        holder.itemView.setOnClickListener {
-        }
     }
 
 
