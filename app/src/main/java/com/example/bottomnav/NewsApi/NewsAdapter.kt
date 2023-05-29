@@ -26,7 +26,11 @@ class NewsAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ArticleViewHolder {
         val view = LayoutInflater.from(context).inflate(R.layout.item_layout, parent, false)
-        return ArticleViewHolder(view)
+        val viewHolder = ArticleViewHolder(view)
+        view.setOnClickListener {
+            listener.onItemClick(articles)
+        }
+        return viewHolder
     }
 
     override fun onBindViewHolder(holder: ArticleViewHolder, position: Int) {
@@ -47,27 +51,15 @@ class NewsAdapter(
     override fun getItemCount(): Int {
         return articles.size
     }
-
-    inner class ArticleViewHolder(itemView: View) : ViewHolder(itemView), View.OnClickListener {
+    class ArticleViewHolder(itemView: View) : ViewHolder(itemView){
 
         var newsImage = itemView.findViewById<ImageView>(R.id.newsImage)
         var newsTitle = itemView.findViewById<TextView>(R.id.newsTitle)
         var newsDescription = itemView.findViewById<TextView>(R.id.newsDescription)
-
-        init {
-            itemView.setOnClickListener(this)
-        }
-
-        override fun onClick(v: View?) {
-            val position = adapterPosition
-            if (position != RecyclerView.NO_POSITION) {
-                listener.onItemClick(position)
-            }
-        }
     }
 
     interface OnItemClickListener {
-        fun onItemClick(position: Int)
+        fun onItemClick(articles: List<Article>)
     }
 
 }

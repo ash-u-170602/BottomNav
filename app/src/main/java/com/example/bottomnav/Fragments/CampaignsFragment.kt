@@ -7,10 +7,14 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.bottomnav.NewsApi.NewsAdapter
 import com.example.bottomnav.NewsApi.NewsService
+import com.example.bottomnav.NewsApi.modalClasses.Article
 import com.example.bottomnav.NewsApi.modalClasses.News
+import com.example.bottomnav.R
 import com.example.bottomnav.SharedViewModel
 import com.example.bottomnav.databinding.FragmentCampaignsBinding
 import retrofit2.Call
@@ -43,7 +47,7 @@ class CampaignsFragment : Fragment(), NewsAdapter.OnItemClickListener {
         val newsService =
             NewsService.newsInstance.getHeadlines(sharedViewModel.homeData.value.toString(), 1)
 
-        newsService.enqueue(object : Callback<News> {
+        newsService.enqueue(object : Callback<News>, NewsAdapter.OnItemClickListener {
             override fun onResponse(call: Call<News>, response: Response<News>) {
                 val news = response.body()
                 if (news != null) {
@@ -56,12 +60,20 @@ class CampaignsFragment : Fragment(), NewsAdapter.OnItemClickListener {
             override fun onFailure(call: Call<News>, t: Throwable) {
                 Toast.makeText(requireContext(), "", Toast.LENGTH_LONG).show()
             }
+
+            override fun onItemClick(articles: List<Article>) {
+                TODO("Not yet implemented")
+            }
+
         })
 
     }
 
     // Handle clicks
-    override fun onItemClick(position: Int) {
-        Toast.makeText(requireContext(), "${news.articles[position].url} sex", Toast.LENGTH_SHORT).show()
-    }
+//    override fun onItemClick(position: Int) {
+//
+//
+//        val navController = findNavController()
+//        navController.navigate(R.id.action_campaignsFragment_to_profileFragment)
+//    }
 }

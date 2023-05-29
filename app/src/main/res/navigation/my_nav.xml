@@ -18,7 +18,11 @@
         android:id="@+id/campaignsFragment"
         android:name="com.example.bottomnav.Fragments.CampaignsFragment"
         android:label="fragment_campaigns"
-        tools:layout="@layout/fragment_campaigns" />
+        tools:layout="@layout/fragment_campaigns" >
+        <action
+            android:id="@+id/action_campaignsFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+    </fragment>
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.example.bottomnav.Fragments.ProfileFragment"
