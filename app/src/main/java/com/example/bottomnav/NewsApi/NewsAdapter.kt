@@ -53,9 +53,9 @@ class NewsAdapter(
     }
     class ArticleViewHolder(itemView: View) : ViewHolder(itemView){
 
-        var newsImage = itemView.findViewById<ImageView>(R.id.newsImage)
-        var newsTitle = itemView.findViewById<TextView>(R.id.newsTitle)
-        var newsDescription = itemView.findViewById<TextView>(R.id.newsDescription)
+        var newsImage: ImageView = itemView.findViewById(R.id.newsImage)
+        var newsTitle: TextView = itemView.findViewById(R.id.newsTitle)
+        var newsDescription: TextView = itemView.findViewById(R.id.newsDescription)
     }
 
     interface OnItemClickListener {
