@@ -45,7 +45,7 @@ class CampaignsFragment : Fragment(), NewsAdapter.OnItemClickListener {
 
         newsService.enqueue(object : Callback<News> {
             override fun onResponse(call: Call<News>, response: Response<News>) {
-                news = response.body()!!
+                val news = response.body()
                 if (news != null) {
                     adapter = NewsAdapter(requireContext(), news.articles, this)
                     binding.newsList.adapter = adapter
