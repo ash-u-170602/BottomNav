@@ -18,9 +18,9 @@ import com.example.bottomnav.SharedViewModel
 import retrofit2.Callback
 
 class NewsAdapter(
-    val context: Context,
-    val articles: List<Article>,
-    val listener: OnItemClickListener
+    private val context: Context,
+    private val articles: List<Article>,
+    private val listener: OnItemClickListener
 ) :
     Adapter<NewsAdapter.ArticleViewHolder>() {
 
@@ -51,7 +51,8 @@ class NewsAdapter(
     override fun getItemCount(): Int {
         return articles.size
     }
-    class ArticleViewHolder(itemView: View) : ViewHolder(itemView){
+
+    class ArticleViewHolder(itemView: View) : ViewHolder(itemView) {
 
         var newsImage: ImageView = itemView.findViewById(R.id.newsImage)
         var newsTitle: TextView = itemView.findViewById(R.id.newsTitle)
