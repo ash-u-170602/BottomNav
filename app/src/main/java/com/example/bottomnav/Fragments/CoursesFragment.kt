@@ -1,6 +1,5 @@
 package com.example.bottomnav.Fragments
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -23,7 +22,7 @@ class CoursesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        sharedViewModel.homeData.observe(requireActivity()) { data ->
+        sharedViewModel.country.observe(requireActivity()) { data ->
             binding.textView.text = data
         }
     }

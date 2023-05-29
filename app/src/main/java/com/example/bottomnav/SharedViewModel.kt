@@ -5,10 +5,10 @@ import androidx.lifecycle.ViewModel
 
 class SharedViewModel() : ViewModel() {
 
-    private val _homeData = MutableLiveData("in")
-    val homeData: MutableLiveData<String> = _homeData
+    private val _country = MutableLiveData("in")
+    val country: MutableLiveData<String> = _country
 
     fun getHomeData(data: String) {
-        _homeData.value = data
+        _country.value = data
     }
 }

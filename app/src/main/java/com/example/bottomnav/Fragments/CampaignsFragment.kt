@@ -7,14 +7,11 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.navigation.Navigation
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.bottomnav.NewsApi.NewsAdapter
 import com.example.bottomnav.NewsApi.NewsService
 import com.example.bottomnav.NewsApi.modalClasses.Article
 import com.example.bottomnav.NewsApi.modalClasses.News
-import com.example.bottomnav.R
 import com.example.bottomnav.SharedViewModel
 import com.example.bottomnav.databinding.FragmentCampaignsBinding
 import retrofit2.Call
@@ -45,7 +42,7 @@ class CampaignsFragment : Fragment(), NewsAdapter.OnItemClickListener {
     private fun getNews() {
 
         val newsService =
-            NewsService.newsInstance.getHeadlines(sharedViewModel.homeData.value.toString(), 1)
+            NewsService.newsInstance.getHeadlines(sharedViewModel.country.value.toString(), 1)
 
         newsService.enqueue(object : Callback<News>, NewsAdapter.OnItemClickListener {
             override fun onResponse(call: Call<News>, response: Response<News>) {
