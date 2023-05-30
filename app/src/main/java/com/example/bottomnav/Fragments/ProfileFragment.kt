@@ -7,11 +7,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
 import com.example.bottomnav.R
+import com.example.bottomnav.SharedViewModel
 import com.example.bottomnav.databinding.FragmentProfileBinding
 
 class ProfileFragment : Fragment() {
     private val binding by lazy { FragmentProfileBinding.inflate(layoutInflater) }
+    private val sharedViewModel: SharedViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -19,6 +22,7 @@ class ProfileFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val view =  inflater.inflate(R.layout.fragment_profile, container, false)
+
         return binding.root
     }
 
@@ -26,9 +30,10 @@ class ProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
         val webView = binding.webView
         webView.apply {
-            loadUrl("https://www.google.com")
+            loadUrl(sharedViewModel.url.value.toString())
             settings.javaScriptEnabled = true
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 settings.safeBrowsingEnabled = true

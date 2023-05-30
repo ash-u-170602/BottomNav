@@ -23,7 +23,7 @@ class LinksFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.send.setOnClickListener {
-            sharedViewModel.getHomeData(binding.editText.text.toString())
+            sharedViewModel.setCountry(binding.editText.text.toString())
         }
     }
 

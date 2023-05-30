@@ -1,42 +1,42 @@
 package com.example.bottomnav.NewsApi
 
-import android.content.Context
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
+import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.Adapter
-import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.bumptech.glide.Glide
 import com.example.bottomnav.NewsApi.modalClasses.Article
-import com.example.bottomnav.R
+import com.example.bottomnav.databinding.ItemLayoutBinding
 
 class NewsAdapter(
-    private val context: Context,
-    private val articles: List<Article>,
-    private val listener: OnItemClickListener
+    private var articles: List<Article>,
+    private val listener: NewsRvListener
 ) :
-    Adapter<NewsAdapter.ArticleViewHolder>() {
+    Adapter<NewsAdapter.HomeViewHolder>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ArticleViewHolder {
-        val view = LayoutInflater.from(context).inflate(R.layout.item_layout, parent, false)
-        val viewHolder = ArticleViewHolder(view)
-        view.setOnClickListener {
-            listener.onItemClick(articles)
-        }
-        return viewHolder
+    inner class HomeViewHolder(val binding: ItemLayoutBinding) :
+        RecyclerView.ViewHolder(binding.root)
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NewsAdapter.HomeViewHolder {
+        return HomeViewHolder(
+            ItemLayoutBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false
+            )
+        )
     }
 
-    override fun onBindViewHolder(holder: ArticleViewHolder, position: Int) {
-        val article = articles[position]
-        holder.newsTitle.text = article.title
-
-        holder.newsDescription.text = article.description
-
-        Glide.with(context)
-            .load(article.urlToImage)
-            .into(holder.newsImage)
+    override fun onBindViewHolder(holder: HomeViewHolder, position: Int) {
+        val item = articles[position]
+        holder.binding.newsTitle.text = item.title
+        holder.binding.newsDescription.text = item.description
+        Glide.with(holder.binding.newsImage.context).load(item.urlToImage)
+            .into(holder.binding.newsImage)
+        //data
+        holder.binding.root.setOnClickListener{
+            listener.onItemClicked(item)
+        }
     }
 
 
@@ -44,15 +44,15 @@ class NewsAdapter(
         return articles.size
     }
 
-    class ArticleViewHolder(itemView: View) : ViewHolder(itemView) {
 
-        var newsImage: ImageView = itemView.findViewById(R.id.newsImage)
-        var newsTitle: TextView = itemView.findViewById(R.id.newsTitle)
-        var newsDescription: TextView = itemView.findViewById(R.id.newsDescription)
+    fun updateData(data:List<Article>){
+        articles=data
+        notifyItemRangeChanged(0,itemCount)
     }
 
-    interface OnItemClickListener {
-        fun onItemClick(articles: List<Article>)
-    }
 
+}
+
+interface NewsRvListener{
+    fun onItemClicked(item:Article)
 }
