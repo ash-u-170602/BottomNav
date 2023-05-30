@@ -28,7 +28,7 @@ class CampaignsFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
         return binding.root
     }
@@ -69,6 +69,7 @@ class CampaignsFragment : Fragment() {
             override fun onItemClicked(item: Article) {
                 val url = item.url
                 sharedViewModel.setUrl(url)
+
 
             }
 
