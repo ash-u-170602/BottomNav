@@ -44,12 +44,10 @@ class CampaignsFragment : Fragment() {
 
         val newsService =
             NewsService.newsInstance.getHeadlines(sharedViewModel.country.value.toString(), 1)
-
         newsService.enqueue(object : Callback<News> {
             override fun onResponse(call: Call<News>, response: Response<News>) {
                 val news = response.body()
                 if (news != null) {
-//                    adapter = NewsAdapter(news.articles)
                     list = ArrayList()
                     list.addAll(news.articles)
                     binding.newsList.adapter = adapter
@@ -59,9 +57,8 @@ class CampaignsFragment : Fragment() {
             }
 
             override fun onFailure(call: Call<News>, t: Throwable) {
-                Toast.makeText(requireContext(), "", Toast.LENGTH_LONG).show()
+                Toast.makeText(requireContext(), "Something went wrong", Toast.LENGTH_LONG).show()
             }
-
 
         })
 
