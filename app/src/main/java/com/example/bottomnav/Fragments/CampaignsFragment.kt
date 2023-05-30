@@ -39,6 +39,7 @@ class CampaignsFragment : Fragment() {
         getNews()
     }
 
+
     //get news
     private fun getNews() {
 
