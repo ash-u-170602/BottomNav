@@ -1,8 +1,6 @@
 package com.example.bottomnav.NewsApi
 
 import com.example.bottomnav.NewsApi.modalClasses.News
-import com.example.bottomnav.SharedViewModel
-import retrofit2.Call
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -16,7 +14,10 @@ const val API_KEY = "180ee558b8a04d6d926acfc4b9cc2e59"
 interface NewsInterface {
 
     @GET("v2/top-headlines?apiKey=$API_KEY")
-    suspend fun getHeadlines(@Query("country") country: String, @Query("page") page: Int): Response<News>
+    suspend fun getHeadlines(
+        @Query("country") country: String,
+        @Query("page") page: Int
+    ): Response<News>
 
 }
 

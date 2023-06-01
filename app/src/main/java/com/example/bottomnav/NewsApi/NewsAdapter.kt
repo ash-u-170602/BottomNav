@@ -34,7 +34,7 @@ class NewsAdapter(
         Glide.with(holder.binding.newsImage.context).load(item.urlToImage)
             .into(holder.binding.newsImage)
         //data
-        holder.binding.root.setOnClickListener{
+        holder.binding.root.setOnClickListener {
             listener.onItemClicked(item)
         }
     }
@@ -45,14 +45,14 @@ class NewsAdapter(
     }
 
 
-    fun updateData(data:List<Article>){
-        articles=data
-        notifyItemRangeChanged(0,itemCount)
+    fun updateData(data: List<Article>) {
+        articles = data
+        notifyItemRangeChanged(0, itemCount)
     }
 
 
 }
 
-interface NewsRvListener{
-    fun onItemClicked(item:Article)
+interface NewsRvListener {
+    fun onItemClicked(item: Article)
 }
