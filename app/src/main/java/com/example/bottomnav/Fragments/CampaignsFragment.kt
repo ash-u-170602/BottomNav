@@ -15,6 +15,7 @@ import com.example.bottomnav.NewsApi.modalClasses.Article
 import com.example.bottomnav.R
 import com.example.bottomnav.SharedViewModel
 import com.example.bottomnav.databinding.FragmentCampaignsBinding
+import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -41,6 +42,7 @@ class CampaignsFragment : Fragment() {
 
 
     //get news
+    @OptIn(DelicateCoroutinesApi::class)
     private fun getNews() {
 
         GlobalScope.launch(Dispatchers.IO) {
@@ -48,7 +50,6 @@ class CampaignsFragment : Fragment() {
                 NewsService.newsInstance.getHeadlines(sharedViewModel.country.value.toString(), 1)
             val news = response.body()
             if (response.isSuccessful) {
-                list = ArrayList()
                 if (news != null) {
                     list.addAll(news.articles)
                     //Handle UI update on the main thread
