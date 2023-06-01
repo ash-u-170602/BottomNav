@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
@@ -13,13 +12,13 @@ import com.example.bottomnav.NewsApi.NewsAdapter
 import com.example.bottomnav.NewsApi.NewsRvListener
 import com.example.bottomnav.NewsApi.NewsService
 import com.example.bottomnav.NewsApi.modalClasses.Article
-import com.example.bottomnav.NewsApi.modalClasses.News
 import com.example.bottomnav.R
 import com.example.bottomnav.SharedViewModel
 import com.example.bottomnav.databinding.FragmentCampaignsBinding
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class CampaignsFragment : Fragment() {
     private val binding by lazy { FragmentCampaignsBinding.inflate(layoutInflater) }
@@ -31,7 +30,6 @@ class CampaignsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        // Inflate the layout for this fragment
         return binding.root
     }
 
@@ -45,26 +43,23 @@ class CampaignsFragment : Fragment() {
     //get news
     private fun getNews() {
 
-        val newsService =
-            NewsService.newsInstance.getHeadlines(sharedViewModel.country.value.toString(), 1)
-        newsService.enqueue(object : Callback<News> {
-            override fun onResponse(call: Call<News>, response: Response<News>) {
-                val news = response.body()
+        GlobalScope.launch(Dispatchers.IO) {
+            val response =
+                NewsService.newsInstance.getHeadlines(sharedViewModel.country.value.toString(), 1)
+            val news = response.body()
+            if (response.isSuccessful) {
+                list = ArrayList()
                 if (news != null) {
-                    list = ArrayList()
                     list.addAll(news.articles)
-                    binding.newsList.adapter = adapter
-                    adapter.updateData(list)
-                    binding.newsList.layoutManager = LinearLayoutManager(requireContext())
+                    //Handle UI update on the main thread
+                    withContext(Dispatchers.Main) {
+                        adapter.updateData(list)
+                        binding.newsList.adapter = adapter
+                        binding.newsList.layoutManager = LinearLayoutManager(requireContext())
+                    }
                 }
             }
-
-            override fun onFailure(call: Call<News>, t: Throwable) {
-                Toast.makeText(requireContext(), "Something went wrong", Toast.LENGTH_LONG).show()
-            }
-
-        })
-
+        }
     }
 
     private val rvListener by lazy {
@@ -75,7 +70,6 @@ class CampaignsFragment : Fragment() {
                 val navController = findNavController()
                 navController.navigate(R.id.action_campaignsFragment_to_profileFragment)
             }
-
         }
     }
 
