@@ -27,6 +27,7 @@ class NewsAdapter(
         )
     }
 
+
     override fun onBindViewHolder(holder: HomeViewHolder, position: Int) {
         val item = articles[position]
         holder.binding.newsTitle.text = item.title
