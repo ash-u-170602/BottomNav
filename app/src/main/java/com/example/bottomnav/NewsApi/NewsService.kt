@@ -21,6 +21,7 @@ interface NewsInterface {
 
 }
 
+
 object NewsService {
     val newsInstance: NewsInterface
 
